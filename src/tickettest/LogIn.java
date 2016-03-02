@@ -5,6 +5,8 @@
  */
 package tickettest;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author mark
  */
-public class LogIn extends JPanel{
+public class LogIn extends JPanel implements ActionListener{
     
     
      JLabel nameLabel;
@@ -24,6 +26,10 @@ public class LogIn extends JPanel{
     
     JButton logInButton;
     JButton signUpButton;
+    
+        DBconnector raelene;
+    
+    
     
     public LogIn(){
     
@@ -39,6 +45,8 @@ public class LogIn extends JPanel{
     
     private void init(){
         
+        
+        raelene = new DBconnector();
       nameLabel =  new JLabel("name");
       nameLabel.setBounds(200,68, 110,40);
         add(nameLabel);
@@ -60,9 +68,47 @@ public class LogIn extends JPanel{
         add(logInButton);
         signUpButton  =  new JButton("sign up");
        signUpButton.setBounds(250,360, 110,40);
+        signUpButton.addActionListener(this);
         add(signUpButton);
         
         
-    }
+    }  // end init
+    
+    
+    
+    
+         @Override
+         public void actionPerformed(ActionEvent event){
+
+       	Object obj = event.getSource();
+       
+    
+        
+        
+                if (obj == signUpButton){
+                  int timeStamp = (int)System.currentTimeMillis();
+                  String myName = nameField.getText();
+                 raelene.enterUser(timeStamp, myName, passwordField.getText(), 8);
+                 //tickettest.TicketTest.makeMaster(new User(myName, timeStamp));
+                 tickettest.TicketTest.screen.createScreen(7,1);
+                 
+                }
+                 
+         }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }  // end class

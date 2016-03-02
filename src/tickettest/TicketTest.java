@@ -22,4 +22,15 @@ public class TicketTest {
        
     }
     
+    public static void makeMaster(User u){
+        
+        master = u;
+        
+        
+        
+    }
+    
+    
+    
+    
 }

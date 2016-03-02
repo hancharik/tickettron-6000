@@ -30,21 +30,19 @@ public class User {
         initContacts();
      }  // end constructor
     
+        public User(String name, int id, int theme){
+    
+       this.name = name; 
+        idNumber = id;
+        this.colorTheme = theme;
+        initContacts();
+     }  // end constructor
+    
    private void initContacts(){
        
        contacts = new ArrayList();
        
-       Category c1 = new Category((int)System.currentTimeMillis(), "notes", idNumber);
-       Category c2 = new Category((int)System.currentTimeMillis(), "Space Patrol", idNumber);
-       Category c3 = new Category((int)System.currentTimeMillis(), "Driver", idNumber);
-       Category c4 = new Category((int)System.currentTimeMillis(), "tickets", idNumber);
-       contacts.add(c1);
-       contacts.add(c2);
-       contacts.add(c3);
-       contacts.add(c4);
-       
-       Category c5 = new Category((int)System.currentTimeMillis(), "aspirations", idNumber);
-       contacts.add(c5);
+      
    }
     
     

@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 import java.sql.*;
+import static tickettest.TicketTest.master;
 
 /**
  *
@@ -179,9 +180,9 @@ System.out.println("result success! "+ results.getInt(1)); //
     
            String sql =
                 
-            "INSERT INTO SPACEUSER.USER (id, name, password) VALUES (?, ?, ?, ?)" ;
+            "INSERT INTO SPACEUSER.MEMOUSER (id, name, password, theme) VALUES (?, ?, ?, ?)" ;
 
-           
+          master = new User(name, id, theme);
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql) ){   
             
@@ -202,10 +203,10 @@ System.out.println("result success! "+ results.getInt(1)); //
             
         }
         
-  
+  master = new User(name, id, theme);
         
         
-    }  // end write to topics          
+    }  // end enter user         
              
              
        private boolean somethingThere(){

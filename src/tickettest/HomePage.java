@@ -89,6 +89,7 @@ public class HomePage extends JPanel implements ActionListener{
        // categoryPanel.setBackground(Color.yellow);
       categoryPanel = categoryPanel();
         categoryPanel.setBounds(200,60,200,300);
+        categoryPanel.setBackground(Color.yellow);
         //categoryPanel.setVisible(false);
         add(categoryPanel);
         
@@ -130,13 +131,13 @@ public class HomePage extends JPanel implements ActionListener{
     //pageButton.setVisible(false);
     submitButton.addActionListener(this);
     add(submitButton);
-    exitButton = new JButton("ticket screen");
+    exitButton = new JButton("log out");
     exitButton.setBounds(12,476,110,40);
     exitButton.setBackground(randomColor(user.getTheme()));//.setBackground(randomColor(theme));
     exitButton.addActionListener(this);
     //pageButton.setVisible(false);
    //pageButton.addActionListener(this);
-   // add(exitButton);
+    add(exitButton);
         
      newButton = new JButton("create");
     newButton.setBounds(240,476,160,40);
@@ -201,7 +202,7 @@ public class HomePage extends JPanel implements ActionListener{
                  
                 if (obj == exitButton){
                   
-                   tickettest.TicketTest.screen.createScreen(2,1);
+                   tickettest.TicketTest.screen.createScreen(8,1);
                     
                 }
          
