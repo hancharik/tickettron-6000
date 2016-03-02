@@ -191,7 +191,7 @@ System.out.println("result success! "+ results.getInt(1)); //
            
                     ps.setInt(1, id);
                     ps.setString(2, name);
-                    ps.setString(3, name);
+                    ps.setString(3, password);
                     ps.setInt(4, theme);
                     ps.executeUpdate();
    
@@ -308,7 +308,47 @@ System.out.println( "printing out now...");
         
     }     // end print category name   
    
-               
+              public  boolean checkThatPassword(String name, String claim) {
+                  boolean temp = false;
+                  int tempTheme = 0;
+                   int tempId = 0;
+                   String returned = "broken raelene 312";
+                   String checkPassword = "broken raelene 313";
+                    System.out.println("checking on name: " + name + ", password " + claim ); 
+        Connection connection = getConnection();
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * FROM SPACEUSER.MEMOUSER WHERE NAME = '" + name + "'"))
+            
+        {
+            while(rs.next())
+            {
+                tempTheme = rs.getInt("theme");
+                checkPassword = rs.getString("password");
+                tempId = rs.getInt("id");
+               System.out.println("password = you gave us " + claim + ", we have " + checkPassword ); 
+            }
+          
+            rs.close();
+            statement.close();
+        }
+        catch(SQLException e)
+        {
+             System.out.println("password = you gave us " + claim + ", we have " + checkPassword ); 
+             System.out.println(e);
+        }
+        
+        if(checkPassword.equals(claim)){
+         temp = true; 
+          master = new User(name, tempId, tempTheme);
+        }
+        
+        
+        
+        
+        return temp;
+        
+        
+    }     // end check that password            
              
                public  ArrayList<Category> getMyCategories(int ownerId) {
                    ArrayList<Category> myThings = new ArrayList();

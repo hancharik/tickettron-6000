@@ -65,6 +65,7 @@ public class LogIn extends JPanel implements ActionListener{
         
        logInButton =  new JButton("log in");
        logInButton.setBounds(100,360, 110,40);
+       logInButton.addActionListener(this);
         add(logInButton);
         signUpButton  =  new JButton("sign up");
        signUpButton.setBounds(250,360, 110,40);
@@ -93,8 +94,28 @@ public class LogIn extends JPanel implements ActionListener{
                  tickettest.TicketTest.screen.createScreen(7,1);
                  
                 }
+                
+                 if (obj == logInButton){
+                  
+                  String myName = nameField.getText();
+                  String myPassword = passwordField.getText();
+                  
+                 if(raelene.checkThatPassword( myName, myPassword)){
+                  tickettest.TicketTest.screen.createScreen(7,1);   
+                 }else{
+                     nameLabel.setText("access denied");
+                 }
+               
                  
-         }
+                 
+                }
+                
+                
+                
+                
+                
+                 
+         }  // end action listener
     
     
     
