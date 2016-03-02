@@ -21,7 +21,7 @@ public class TFrame extends JFrame{
     LogIn logIn = new LogIn();
     
     public TFrame(){
-        super ("Ticket Test 6000");
+        super ("<<<<<<   TicketTron 6000   >>>>>>");
         
        
                 
