@@ -45,14 +45,14 @@ public class TicketPage extends JPanel implements ActionListener{
     
     DBconnector raelene;
     
-    private int toWhom;
+    private int whichTopic;
     private User user = tickettest.TicketTest.master;
     
-    public TicketPage(int recipient){
+    public TicketPage(int topic){
         
         super();
         
-        toWhom = recipient;
+        whichTopic = topic;
         topics = user.getContacts();
         setLayout(null);
         setBackground(randomColor(user.getTheme()));
@@ -67,7 +67,7 @@ public class TicketPage extends JPanel implements ActionListener{
     private void initComponents(){
       
         raelene = new DBconnector();
-        raelene.printSection(toWhom);
+        raelene.printSection(whichTopic);
         pic = new JButton("pic");
         pic.setBounds(12,40, 110,120);
         String picname = "images/tf1.jpg"; 
@@ -80,8 +80,8 @@ public class TicketPage extends JPanel implements ActionListener{
         nametag.setBounds(40,168, 110,40);
        // add(nametag);
         
-        titleTag = new JLabel("Posting to Category: " + raelene.printCategoryName(toWhom));
-        // titleTag = new JLabel("Posting to Category: " + topics.get(toWhom).getName());
+        titleTag = new JLabel("Posting to Category: " + raelene.printCategoryName(whichTopic));
+     //titleTag = new JLabel("Posting to Category: " + topics.get(whichTopic).getName());
         titleTag.setBounds(80,4, 500,20);
         add(titleTag);
         
@@ -165,7 +165,7 @@ public class TicketPage extends JPanel implements ActionListener{
                     //writearea.append("\n   " + properDate() + "\n");
                    // writearea.getText()
                     //tickettest.TicketTest.memoId
-                    raelene.writeToMemo( (int)System.currentTimeMillis(), user.getId(), toWhom,  readarea.getText(), writearea.getText() );
+                    raelene.writeToMemo( (int)System.currentTimeMillis(), user.getId(), whichTopic,  readarea.getText(), writearea.getText() );
                     
                      
                     tickettest.TicketTest.screen.createScreen(3,1);

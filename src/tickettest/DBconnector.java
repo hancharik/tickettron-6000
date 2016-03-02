@@ -282,9 +282,22 @@ System.out.println( "printing out now...");
         }
     }     // end print section
          
+    
+         
+         
+         
+         
+         
+         
+         
+         
          
                public  String printCategoryName(int category) {
-                   String returned = "broken raelene 287";
+                   String returned = "broken raelene 287 no name on retreival";
+                   int ireturned = 0;
+                           
+                           
+                           
         Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("SELECT * FROM SPACEUSER.TOPICS WHERE ID = " + category))
@@ -292,7 +305,7 @@ System.out.println( "printing out now...");
             while(rs.next())
             {
                 returned = rs.getString("name");
-           
+           ireturned = rs.getInt("id");
             }
           
             rs.close();
@@ -303,11 +316,22 @@ System.out.println( "printing out now...");
             System.out.println(e);
         }
         
-        return returned;
+        return returned + "" + ireturned;
         
         
     }     // end print category name   
    
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
               public  boolean checkThatPassword(String name, String claim) {
                   boolean temp = false;
                   int tempTheme = 0;
