@@ -284,7 +284,7 @@ System.out.println( "printing out now...");
          
          
                public  String printCategoryName(int category) {
-                   String returned = "broken raelene 253";
+                   String returned = "broken raelene 287";
         Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("SELECT * FROM SPACEUSER.TOPICS WHERE ID = " + category))
