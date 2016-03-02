@@ -14,12 +14,14 @@ public class Category {
     
     private int identifier;
     private String name;
+    private DBconnector raelene;
     
-    
-        public Category(int id, String name){
+        public Category(int id, String name, int owner){
     
           identifier = id;
           this.name = name;
+          enterIntoDatabase(id, name, owner);
+          
         }  // end constructor
     
     public int getId(){
@@ -34,6 +36,13 @@ public class Category {
         
     }
     
-    
+   private void enterIntoDatabase(int ii, String nn, int oo){
+       
+      raelene = new DBconnector();
+      raelene.writeToTopics(ii, nn, oo); 
+       
+       
+       
+   } 
             
 }//

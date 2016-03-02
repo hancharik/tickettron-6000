@@ -47,7 +47,7 @@ public class HomePage extends JPanel implements ActionListener{
      
      JPanel categoryPanel;
      
-    ArrayList<Integer> contactList;
+    ArrayList<Category> categoreez;// = user.getContacts();
     ArrayList<JButton> contactButtons;
     
     DBconnector raelene;
@@ -75,7 +75,8 @@ public class HomePage extends JPanel implements ActionListener{
     private void initComponents(){
       
         raelene = new DBconnector();
-        contactList = user.getContacts();
+         categoreez  = raelene.getMyCategories(user.getId());
+       // contactList = user.getContacts();
         contactButtons = new ArrayList();
         pic = new JButton("pic");
         pic.setBounds(12,40, 110,120);
@@ -87,7 +88,7 @@ public class HomePage extends JPanel implements ActionListener{
       //  categoryPanel = new JPanel();
        // categoryPanel.setBackground(Color.yellow);
       categoryPanel = categoryPanel();
-        categoryPanel.setBounds(200,60,200,200);
+        categoryPanel.setBounds(200,60,200,300);
         //categoryPanel.setVisible(false);
         add(categoryPanel);
         
@@ -98,7 +99,7 @@ public class HomePage extends JPanel implements ActionListener{
         nametag.setBounds(40,168, 110,40);
         add(nametag);
         
-        titleTag = new JLabel("home page for " + user.getName() + " who has " + contactList.size() + " categories");
+        titleTag = new JLabel("home page for " + user.getName() + " who has " + categoreez.size() + " categories");
         titleTag.setBounds(80,4, 500,20);
         add(titleTag);
         
@@ -107,11 +108,11 @@ public class HomePage extends JPanel implements ActionListener{
     ///////////////////////////////////////////////////////
     ///////// this is a group
     
-     directions = new JLabel("directions go here...");
-        directions.setBounds(240,386,160,40);
+     directions = new JLabel("enter name for category:");
+        directions.setBounds(248,380,160,40);
         directions.setVisible(false);
         add(directions);
-        newName = new JTextField("directions go here...");
+        newName = new JTextField();
         newName.setBounds(240,416,160,40);
         newName.setVisible(false);
         add(newName);
@@ -174,14 +175,30 @@ public class HomePage extends JPanel implements ActionListener{
                     // submitButton.setText("whaa???");
                   
                   repaint();
-                    
+                    newName.requestFocus();
                 }
+                
+                
+                
                  if (obj == newButton){
                   
-                   Category someting = new Category(user.getContacts().size()+1, newName.getText());
+                     int timeStamp = (int)System.currentTimeMillis();
+                     
+                   Category someting = new Category(timeStamp, newName.getText(), user.getId());
                    user.addCategory(someting);
+                   raelene.writeToTopics(timeStamp, newName.getText(), user.getId());
                    tickettest.TicketTest.screen.createScreen(5,2);
+                   
+                   
+                   
+                   
+                   
                 }
+                 
+                 
+                 
+                 
+                 
                 if (obj == exitButton){
                   
                    tickettest.TicketTest.screen.createScreen(2,1);
@@ -273,7 +290,7 @@ public class HomePage extends JPanel implements ActionListener{
    
      private JPanel categoryPanel(){
     
-         ArrayList<Category> categoreez = user.getContacts();
+         
      JPanel mercPanel = new JPanel();
      int rows = categoreez.size();
      int columns = 1;
@@ -283,7 +300,7 @@ public class HomePage extends JPanel implements ActionListener{
    // colorMerchantsWithTransactions();
     for(int i = 0; i <  rows; i++){   
         JButton jimmy = new JButton();
-     
+     jimmy.setSize(160, 40);
        // if(user.getContacts().size()< i){
             // jimmy.setText("" + i);  
          jimmy.setText(categoreez.get(i).getName());  

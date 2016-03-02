@@ -33,16 +33,17 @@ public class User {
    private void initContacts(){
        
        contacts = new ArrayList();
-       Category c1 = new Category(1, "notes");
-       Category c2 = new Category(2, "Space Patrol");
-       Category c3 = new Category(3, "Driver");
-       Category c4 = new Category(4, "tickets");
+       
+       Category c1 = new Category((int)System.currentTimeMillis(), "notes", idNumber);
+       Category c2 = new Category((int)System.currentTimeMillis(), "Space Patrol", idNumber);
+       Category c3 = new Category((int)System.currentTimeMillis(), "Driver", idNumber);
+       Category c4 = new Category((int)System.currentTimeMillis(), "tickets", idNumber);
        contacts.add(c1);
        contacts.add(c2);
        contacts.add(c3);
        contacts.add(c4);
        
-       Category c5 = new Category(5, "aspirations");
+       Category c5 = new Category((int)System.currentTimeMillis(), "aspirations", idNumber);
        contacts.add(c5);
    }
     

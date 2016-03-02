@@ -21,34 +21,20 @@ public class DBconnector {
     int mapArraySize = 20;//(testdbconnector.TestDBConnector.mapSize * testdbconnector.TestDBConnector.mapSize) + 1;
     public boolean[] stars = new boolean[mapArraySize];
     int counter = 1;
-    
+    String head;
+    String tail;
     
    public  DBconnector() {
        
       //getConnection(); 
       System.out.println("good to go.\n LET WRITE TO SOME DATABASES, BABY!"); 
     
-      //writeSectors();
-        /*
+     
+   
       System.out.println(" very ok."); 
-      //printSectors();
+  
       System.out.println(" very very ok.");
-      printSectorByVectors(0,0);
-      printSectorByVectors(82,52);
-      printSectorByVectors(15,75);
-      printSectorByVectors(10,20);
-      printSectorByVectors(62,5);
-      printSectorByVectors(1,9);
-      printSectorByVectors(40,8);
-      printSectorByVectors(88,22);
-      printSectorByVectors(65,75);
-      printSectorByVectors(11,20);
-      printSectorByVectors(63,5);
-      printSectorByVectors(11,9);
-      System.out.println(" o my goodness yes.");
-      */
-     // printGalaxyMap(10,-2);
-    //  printGalaxyMap(10,-4);
+ 
    }
     
     
@@ -148,7 +134,79 @@ System.out.println("result success! "+ results.getInt(1)); //
   
         
         
-    }  // end write sectors
+    }  // end write to memo
+     
+             
+             
+         ////////////////////////////////////////////////////////////////     
+     ////////////////////////////////////////////////////////////////////////////
+          
+             public void writeToTopics(int id, String name, int owner) {
+    
+           String sql =
+                
+            "INSERT INTO SPACEUSER.TOPICS (id, name, owner) VALUES (?, ?, ?)" ;
+
+           
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS) ){   
+            
+           // counter = 1;
+            
+           
+                    ps.setInt(1, id);
+                    ps.setString(2, name);
+                    ps.setInt(3, owner);
+                    ps.executeUpdate();
+   
+           
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e);
+            
+        }
+        
+  
+        
+        
+    }  // end write to topics
+     
+           ////////////////////////////////////////////////////////////////     
+     ////////////////////////////////////////////////////////////////////////////
+          
+             public void enterUser(int id, String name, String password, int theme) {
+    
+           String sql =
+                
+            "INSERT INTO SPACEUSER.USER (id, name, password) VALUES (?, ?, ?, ?)" ;
+
+           
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql) ){   
+            
+           // counter = 1;
+            
+           
+                    ps.setInt(1, id);
+                    ps.setString(2, name);
+                    ps.setString(3, name);
+                    ps.setInt(4, theme);
+                    ps.executeUpdate();
+   
+           
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e);
+            
+        }
+        
+  
+        
+        
+    }  // end write to topics          
+             
              
        private boolean somethingThere(){
          boolean yesOrNo = false;
@@ -163,7 +221,7 @@ System.out.println("result success! "+ results.getInt(1)); //
   ////////////////////////////////////////////////////////////////////////        
   /////////////////////////////////////////////////////////////////////////////        
           
-          
+         // SELECT * FROM SPACEUSER.MEMO WHERE  MEMOTO = 4;
          public  void printSectors() {
         Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
@@ -189,8 +247,118 @@ System.out.println( "printing out now...");
         {
             System.out.println(e);
         }
-    }     
+    }     // END PRINT SECTORS
     
+         
+         
+            // ;
+         public  void printSection(int category) {
+        Connection connection = getConnection();
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * FROM SPACEUSER.MEMO WHERE  MEMOTO = " + category))
+        {
+            
+System.out.println( "printing out now...");
+            
+            while(rs.next())
+            {
+                String hhead = rs.getString("memohead");
+                String ttail = rs.getString("memotail");
+                
+              head = hhead;
+              tail = ttail;
+
+               System.out.println("from category: " +category + ",\n head:" + hhead + "\ntail: " + ttail );
+            }
+            System.out.println();
+
+            rs.close();
+            statement.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+    }     // end print section
+         
+         
+               public  String printCategoryName(int category) {
+                   String returned = "broken raelene 253";
+        Connection connection = getConnection();
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * FROM SPACEUSER.TOPICS WHERE ID = " + category))
+        {
+            while(rs.next())
+            {
+                returned = rs.getString("name");
+           
+            }
+          
+            rs.close();
+            statement.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+        
+        return returned;
+        
+        
+    }     // end print category name   
+   
+               
+             
+               public  ArrayList<Category> getMyCategories(int ownerId) {
+                   ArrayList<Category> myThings = new ArrayList();
+        Connection connection = getConnection();
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * FROM SPACEUSER.TOPICS WHERE OWNER = " + ownerId))
+        {
+            while(rs.next())
+            {
+                int catid = rs.getInt("id");
+                String catName = rs.getString("name");
+                
+                
+           Category temp = new Category( catid, catName, ownerId);
+           myThings.add(temp);
+           
+            }
+          
+            rs.close();
+            statement.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+        
+        return myThings;
+        
+        
+    }     // end get my categories           
+               
+               
+               
+               
+               
+         public String getHead(){
+             return head;
+         }
+         
+         public String getTail(){
+             return tail;
+         }
+         
+            public String getHead(int id){
+             return head;
+         }
+         
+         public String getTail(int id){
+             return tail;
+         }
+          
          
          
          
@@ -232,7 +400,42 @@ System.out.println( "printing out now...");
         }
     }  // end sector by vectors   
          
-         
+             public void printSectionByVectors(int x, int y)
+    {
+        Connection connection = getConnection();
+        try
+        {
+            PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM SPACEUSER.FIELD WHERE X = ? AND Y = ?");
+            ps.setInt(1, x);
+            ps.setInt(2, y);
+            ResultSet rs = ps.executeQuery();
+          
+            if(rs.next())
+            {
+                 int xCord = rs.getInt("x");
+                int yCord = rs.getInt("y");
+                int id = rs.getInt("id");
+                boolean star = rs.getBoolean("empty");
+
+              System.out.println("id at (" + xCord + "," + yCord + ")  is: " + id + " and star is " + star);
+             
+                if(star){
+               System.out.println("there is a solar system there");  
+                }else{
+             System.out.println("empty space");   
+                }
+                
+            }
+
+            rs.close();
+            ps.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+    }  // end sector by vectors    
          
            public void printGalaxyMap(int x, int y){
         

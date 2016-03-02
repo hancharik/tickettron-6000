@@ -38,6 +38,8 @@ public class TicketPage extends JPanel implements ActionListener{
     JButton homeButton;
     JLabel nametag;
     JLabel titleTag;
+    JLabel headTag;
+    JLabel tailTag;
     
     ArrayList<Category> topics;
     
@@ -65,7 +67,7 @@ public class TicketPage extends JPanel implements ActionListener{
     private void initComponents(){
       
         raelene = new DBconnector();
-        
+        raelene.printSection(topics.get(toWhom).getId());
         pic = new JButton("pic");
         pic.setBounds(12,40, 110,120);
         String picname = "images/tf1.jpg"; 
@@ -78,10 +80,18 @@ public class TicketPage extends JPanel implements ActionListener{
         nametag.setBounds(40,168, 110,40);
        // add(nametag);
         
-        titleTag = new JLabel("Posting to Category: " + topics.get(toWhom).getName());
+        titleTag = new JLabel("Posting to Category: " + raelene.printCategoryName(topics.get(toWhom).getId()));
+        // titleTag = new JLabel("Posting to Category: " + topics.get(toWhom).getName());
         titleTag.setBounds(80,4, 500,20);
         add(titleTag);
         
+        headTag = new JLabel( raelene.getHead());
+        headTag.setBounds(40,34, 500,20);
+        add(headTag);
+        
+        tailTag = new JLabel(raelene.getTail());
+        tailTag.setBounds(40,64, 500,20);
+        add(tailTag);
             
        ///////////////////////////////////////////////////////  
     ///////////////////////////////////////////////////////
@@ -92,7 +102,7 @@ public class TicketPage extends JPanel implements ActionListener{
         readarea.setBackground(randomColor(user.getTheme()));
     readscroll = new JScrollPane (readarea, 
    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    readscroll.setBounds(20, 60, 422,100);
+    readscroll.setBounds(20, 120, 422,100);
     add(readscroll);
     
        ///////// this is a group
@@ -101,7 +111,7 @@ public class TicketPage extends JPanel implements ActionListener{
    
          writearea = new JTextArea();
         writearea.setBackground(randomColor(user.getTheme()));
-        writearea.setBounds(20, 180, 422,200);
+        writearea.setBounds(20, 240, 422,200);
         writearea.setEditable(true);
         add(writearea);
         
@@ -155,7 +165,7 @@ public class TicketPage extends JPanel implements ActionListener{
                     //writearea.append("\n   " + properDate() + "\n");
                    // writearea.getText()
                     //tickettest.TicketTest.memoId
-                    raelene.writeToMemo( (int)System.currentTimeMillis(), user.getId(),  toWhom,  readarea.getText(), writearea.getText() );
+                    raelene.writeToMemo( (int)System.currentTimeMillis(), user.getId(), topics.get(toWhom).getId(),  readarea.getText(), writearea.getText() );
                     
                      
                     tickettest.TicketTest.screen.createScreen(3,1);
