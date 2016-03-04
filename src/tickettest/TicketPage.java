@@ -66,6 +66,7 @@ public class TicketPage extends JPanel implements ActionListener{
     //scroll.setBounds(scrollx,6,640,420);
     private void initComponents(){
       
+        //raelene = tickettest.TicketTest.dbConnector;
         raelene = new DBconnector();
         raelene.printSection(whichTopic);
         pic = new JButton("pic");

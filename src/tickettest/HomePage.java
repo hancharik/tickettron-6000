@@ -66,7 +66,7 @@ public class HomePage extends JPanel implements ActionListener{
         setBackground(randomColor(user.getTheme()));
         initComponents();
         
-        System.out.println(getDurationBreakdown(System.currentTimeMillis()));
+       // System.out.println(getDurationBreakdown(System.currentTimeMillis()));
         
         
     }// end constructor
@@ -74,6 +74,7 @@ public class HomePage extends JPanel implements ActionListener{
     //scroll.setBounds(scrollx,6,640,420);
     private void initComponents(){
       
+       // raelene = tickettest.TicketTest.dbConnector;
         raelene = new DBconnector();
          categoreez  = raelene.getMyCategories(user.getId());
        // contactList = user.getContacts();
@@ -207,12 +208,15 @@ public class HomePage extends JPanel implements ActionListener{
                 }
          
                 
+                
+                
+                
                    for(int i = 0; i < contactButtons.size(); i++){
     
              
                  if (obj ==  contactButtons.get(i)){
                     
-                     tickettest.TicketTest.screen.createScreen(4,i );
+                     tickettest.TicketTest.screen.createScreen(4,categoreez.get(i).getId() );
                     }
        
                 }

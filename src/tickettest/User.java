@@ -18,7 +18,7 @@ public class User {
     private int idNumber;
     private ArrayList<Category> contacts;
     private String picture = "images/tf1.jpg";
-    private int colorTheme = 4;
+    private int colorTheme = 9;
     
     
     

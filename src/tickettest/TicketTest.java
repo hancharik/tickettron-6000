@@ -13,22 +13,16 @@ public class TicketTest {
 
    static TFrame screen;
    static User master;
-   
+   public static DBconnector dbConnector;
     public static void main(String[] args) {
-        
+          dbConnector = new DBconnector();
         master = new User("mark", 11);
        screen = new TFrame();
-       
+     
        
     }
     
-    public static void makeMaster(User u){
-        
-        master = u;
-        
-        
-        
-    }
+ 
     
     
     
